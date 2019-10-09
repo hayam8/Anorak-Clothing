@@ -3,6 +3,12 @@ body {
   padding: 20px 60px;
 }
 
-header {
+span {
+  font-family: "Roboto Condensed";
+}
+
+a {
+  text-decoration: none;
+  color: black;
   font-family: "Roboto Condensed";
 }
