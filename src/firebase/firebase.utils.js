@@ -13,6 +13,33 @@ const config = {
   measurementId: "G-68PG449E20"
 };
 
+// for storing user data in firebase
+export const createUserProfileDocument = async (userAuth, extraData) => {
+  // return if no user logged in
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+  // create snapshot if it hasn't been created
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date(); // timestamp
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...extraData
+      });
+    } catch (e) {
+      console.log("error creating user", e.message);
+    }
+  }
+
+  return userRef;
+};
+
 firebase.initializeApp(config);
 
 // export needed objects
