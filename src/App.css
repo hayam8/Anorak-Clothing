@@ -12,3 +12,7 @@ a {
   color: black;
   font-family: "Roboto Condensed";
 }
+
+* {
+  box-sizing: border-box;
+}
