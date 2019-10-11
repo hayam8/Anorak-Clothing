@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 import PropTypes from "prop-types";
+import CartDropdown from "../cart-dropdown/CartDropdown";
+import CartIcon from "../cart-icon/CartIcon";
 import { ReactComponent as Logo } from "../../assets/anorak.svg";
 import "./nav-bar.scss";
 
@@ -28,7 +30,9 @@ const NavBar = ({ currentUser }) => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      <CartDropdown />
     </div>
   );
 };
