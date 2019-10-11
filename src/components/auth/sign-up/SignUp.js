@@ -21,12 +21,12 @@ class SignUp extends Component {
   }
 
   clearForm = () => {
-    this.state = {
+    this.setState({
       displayName: "",
       email: "",
       password: "",
       confirmPassword: ""
-    };
+    });
   };
 
   onSubmit = async e => {
@@ -34,8 +34,8 @@ class SignUp extends Component {
 
     const { displayName, email, password, confirmPassword } = this.state;
 
-    if (password != confirmPassword) {
-      alert("passwords do not match");
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
       return;
     }
 
