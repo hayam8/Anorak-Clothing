@@ -2,8 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
+import { createStructuredSelector } from "reselect";
 import PropTypes from "prop-types";
 import CartDropdown from "../cart-dropdown/CartDropdown";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+
 import CartIcon from "../cart-icon/CartIcon";
 import { ReactComponent as Logo } from "../../assets/anorak.svg";
 import "./nav-bar.scss";
@@ -41,9 +45,9 @@ NavBar.propTypes = {
   currentUser: PropTypes.object
 };
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(NavBar);
