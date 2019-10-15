@@ -9,9 +9,14 @@ import ShopPage from "./pages/shop/ShopPage";
 import SignInAndSignUp from "./pages/auth/SignInAndSignUp";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserProfileDocument
+  //addCollectionDocuments
+} from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/userActions";
 import { selectCurrentUser } from "./redux/user/user.selector";
+import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 
 import "./App.css";
 
@@ -34,6 +39,13 @@ class App extends Component {
         });
       }
       setCurrentUser(userAuth);
+      // Return object of titles & items, ignoring other values
+      /*
+      addCollectionDocuments(
+        "collections",
+        collectionsArray.map(({ title, items }) => ({ title, items }))
+      );
+      */
     });
   }
 
@@ -65,6 +77,7 @@ class App extends Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
+  //collectionsArray: selectCollectionsForPreview
 });
 
 const mapDispatchToProps = dispatch => ({
