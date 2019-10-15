@@ -2,8 +2,8 @@
  * Contains sample shopping items for store
  */
 
-const SHOP_DATA = [
-  {
+const SHOP_DATA = {
+  hats: {
     id: 1,
     title: "Hats",
     routeName: "hats",
@@ -64,7 +64,7 @@ const SHOP_DATA = [
       }
     ]
   },
-  {
+  shoes: {
     id: 2,
     title: "Shoes",
     routeName: "shoes",
@@ -119,7 +119,7 @@ const SHOP_DATA = [
       }
     ]
   },
-  {
+  jackets: {
     id: 3,
     title: "Jackets",
     routeName: "jackets",
@@ -156,7 +156,7 @@ const SHOP_DATA = [
       }
     ]
   },
-  {
+  womens: {
     id: 4,
     title: "Womens",
     routeName: "womens",
@@ -205,7 +205,7 @@ const SHOP_DATA = [
       }
     ]
   },
-  {
+  mens: {
     id: 5,
     title: "Mens",
     routeName: "mens",
@@ -248,6 +248,6 @@ const SHOP_DATA = [
       }
     ]
   }
-];
+};
 
 export default SHOP_DATA;
