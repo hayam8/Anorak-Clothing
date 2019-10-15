@@ -12,11 +12,11 @@ import CheckoutPage from "./pages/checkout/CheckoutPage";
 import {
   auth,
   createUserProfileDocument
-  //addCollectionDocuments
+  //addCollectionAndDocuments
 } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/userActions";
 import { selectCurrentUser } from "./redux/user/user.selector";
-import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
+//import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 
 import "./App.css";
 
@@ -41,7 +41,7 @@ class App extends Component {
       setCurrentUser(userAuth);
       // Return object of titles & items, ignoring other values
       /*
-      addCollectionDocuments(
+      addCollectionAndDocuments(
         "collections",
         collectionsArray.map(({ title, items }) => ({ title, items }))
       );
