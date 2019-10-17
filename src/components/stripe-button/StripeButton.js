@@ -18,7 +18,7 @@ const StripeButton = ({ price }) => {
       name='Anorak Clothing Ltd.'
       billingAddress
       shippingAddress
-      image='https://svgshare.com/i/FWh.svg'
+      image='http://svgshare.com/i/FWh.svg'
       description={`Your total is $${price}`}
       panelLabel='Pay Now'
       token={onToken}

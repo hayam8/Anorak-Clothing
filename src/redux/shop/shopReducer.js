@@ -1,15 +1,33 @@
-import { UPDATE_COLLECTIONS } from "./shop.types";
+import {
+  LOAD_COLLECTIONS_START,
+  LOAD_COLLECTIONS_SUCCESS,
+  LOAD_COLLECTIONS_FAIL
+} from "./shop.types";
 
 const INITIAL_STATE = {
-  collections: null
+  collections: null,
+  isLoading: false,
+  errorMessage: ""
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_COLLECTIONS:
+    case LOAD_COLLECTIONS_START:
       return {
         ...state,
+        isLoading: true
+      };
+    case LOAD_COLLECTIONS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
         collections: action.payload
+      };
+    case LOAD_COLLECTIONS_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload
       };
     default:
       return state;
