@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { signOutStart } from "../../redux/user/userActions";
 
 import CartIcon from "../cart-icon/CartIcon";
 import { ReactComponent as Logo } from "../../assets/anorak.svg";
@@ -18,7 +19,7 @@ import {
   OptionLink
 } from "./navbar.styles";
 
-const NavBar = ({ currentUser, hidden }) => {
+const NavBar = ({ currentUser, hidden, signOutStart }) => {
   return (
     <NavBarContainer>
       <LogoContainer to='/'>
@@ -28,7 +29,7 @@ const NavBar = ({ currentUser, hidden }) => {
         <OptionLink to='/shop'>SHOP</OptionLink>
         <OptionLink to='/contact'>CONTACT</OptionLink>
         {currentUser ? (
-          <OptionLink as='div' onClick={() => auth.signOut()}>
+          <OptionLink as='div' onClick={signOutStart}>
             SIGN OUT
           </OptionLink>
         ) : (
@@ -50,4 +51,11 @@ const mapStateToProps = createStructuredSelector({
   hidden: selectCartHidden
 });
 
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar);
