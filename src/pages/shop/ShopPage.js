@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { loadCollectionsStartAsync } from "../../redux/shop/shop.actions";
+import { loadCollectionsStart } from "../../redux/shop/shop.actions";
 
 import CollectionsOverviewContainer from "../../components/collections-overview/CollectionsOverview.container";
 import CollectionPageContainer from "../collection/CollectionPage.container";
@@ -9,8 +9,8 @@ import CollectionPageContainer from "../collection/CollectionPage.container";
 class ShopPage extends Component {
   // retreive data for collections from firebase
   componentDidMount() {
-    const { loadCollectionsStartAsync } = this.props;
-    loadCollectionsStartAsync();
+    const { loadCollectionsStart } = this.props;
+    loadCollectionsStart();
   }
 
   render() {
@@ -33,7 +33,7 @@ class ShopPage extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loadCollectionsStartAsync: () => dispatch(loadCollectionsStartAsync())
+  loadCollectionsStart: () => dispatch(loadCollectionsStart())
 });
 
 export default connect(

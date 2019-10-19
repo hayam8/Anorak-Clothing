@@ -26,27 +26,27 @@ class App extends Component {
   // set user to logged in user
   componentDidMount() {
     const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
 
-        // CALL DISPATCH ON SET CURRENT USER REDUCER
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-      setCurrentUser(userAuth);
-      // Return object of titles & items, ignoring other values
-      /*
+    //     // CALL DISPATCH ON SET CURRENT USER REDUCER
+    //     userRef.onSnapshot(snapShot => {
+    //       setCurrentUser({
+    //         id: snapShot.id,
+    //         ...snapShot.data()
+    //       });
+    //     });
+    //   }
+    //   setCurrentUser(userAuth);
+    // Return object of titles & items, ignoring other values
+    /*
       addCollectionAndDocuments(
         "collections",
         collectionsArray.map(({ title, items }) => ({ title, items }))
       );
       */
-    });
+    // });
   }
 
   // logs out user when component unmounts
