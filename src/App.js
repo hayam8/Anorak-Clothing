@@ -8,13 +8,13 @@ import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import SignInAndSignUp from "./pages/auth/SignInAndSignUp";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
+import { checkUserSession } from "./redux/user/userActions";
 
 import {
   auth,
   createUserProfileDocument
   //addCollectionAndDocuments
 } from "./firebase/firebase.utils";
-import { setCurrentUser } from "./redux/user/userActions";
 import { selectCurrentUser } from "./redux/user/user.selector";
 //import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 
@@ -25,11 +25,11 @@ class App extends Component {
 
   // set user to logged in user
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { checkUserSession } = this.props;
+    checkUserSession(); // persistence so user stays logged in
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if (userAuth) {
     //     const userRef = await createUserProfileDocument(userAuth);
-
     //     // CALL DISPATCH ON SET CURRENT USER REDUCER
     //     userRef.onSnapshot(snapShot => {
     //       setCurrentUser({
@@ -81,7 +81,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(
