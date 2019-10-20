@@ -3,7 +3,10 @@ import {
   signInSuccess,
   signInFail,
   signOutSuccess,
-  signOutFail
+  signOutFail,
+  signUpFail,
+  signUpStart,
+  signUpSuccess
 } from "./userActions";
 import {
   GOOGLE_SIGN_IN_START,
@@ -11,7 +14,9 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAIL,
   CHECK_USER_SESSION,
-  SIGN_OUT_START
+  SIGN_OUT_START,
+  SIGN_UP_START,
+  SIGN_UP_SUCCESS
 } from "./user.types";
 
 import {
@@ -21,9 +26,14 @@ import {
   getCurrentUser
 } from "../../firebase/firebase.utils";
 
-export function* getSnapshotFromUserAuth(userAuth) {
+export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth);
+    // create user document in firebase
+    const userRef = yield call(
+      createUserProfileDocument,
+      userAuth,
+      additionalData
+    );
     const userSnapshot = yield userRef.get();
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
@@ -50,6 +60,20 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
+export function* signUp({ payload: { displayName, email, password } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+
+    yield put(signUpSuccess({ user, additionalData: { displayName } }));
+  } catch (error) {
+    yield put(signUpFail(error));
+  }
+}
+
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield getSnapshotFromUserAuth(user, additionalData);
+}
+
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
@@ -67,6 +91,14 @@ export function* signOut() {
   } catch (error) {
     yield put(signOutFail(error));
   }
+}
+
+export function* onSignUpStart() {
+  yield takeLatest(SIGN_UP_START, signUp);
+}
+
+export function* onSignUpSuccess() {
+  yield takeLatest(SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
 export function* onGoogleSignInStart() {
@@ -90,6 +122,8 @@ export function* onSignOutStart() {
  */
 export function* userSagas() {
   yield all([
+    call(onSignUpStart),
+    call(onSignUpSuccess),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(isUserAuthenticated),
