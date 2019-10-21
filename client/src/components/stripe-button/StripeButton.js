@@ -20,6 +20,7 @@ const StripeButton = ({ price }) => {
       shippingAddress
       image='http://svgshare.com/i/FWh.svg'
       description={`Your total is $${price}`}
+      amount={priceStripe}
       panelLabel='Pay Now'
       token={onToken}
       stripeKey={publishableKey}
