@@ -6,31 +6,34 @@ import CartItem from "../cart-item/CartItem";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { toggleCartVisibility } from "../../redux/cart/cartActions";
 
-import Button from "../button/Button";
-
-import "./cart-dropdown.scss";
+import {
+  CartDropdownContainer,
+  CartDropdownButton,
+  EmptyMessageContainer,
+  CartItemsContainer
+} from "./cart-dropdown.styles";
 
 const CartDropdown = ({ cartItems, history, dispatch }) => {
   return (
-    <div className='cart-dropdown'>
-      <div className='cart-items'>
+    <CartDropdownContainer>
+      <CartItemsContainer>
         {cartItems.length ? (
           cartItems.map(cartItem => (
             <CartItem key={cartItem.id} item={cartItem} />
           ))
         ) : (
-          <span className='empty-message'>YOUR BAG IS EMPTY...</span>
+          <EmptyMessageContainer>YOUR BAG IS EMPTY...</EmptyMessageContainer>
         )}
-      </div>
-      <Button
+      </CartItemsContainer>
+      <CartDropdownButton
         onClick={() => {
           history.push("/checkout");
           dispatch(toggleCartVisibility());
         }}
       >
         GO TO CHECKOUT
-      </Button>
-    </div>
+      </CartDropdownButton>
+    </CartDropdownContainer>
   );
 };
 

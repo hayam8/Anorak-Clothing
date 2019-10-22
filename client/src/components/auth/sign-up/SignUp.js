@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import FormInput from "../../form-input/FormInput";
 import Button from "../../button/Button";
 import { signUpStart } from "../../../redux/user/userActions";
-import "./sign-up.scss";
+
+import { SignUpContainer, SignUpTitle } from "./sign-up.styles";
 
 const SignUp = ({ signUpStart }) => {
   const [userCredentials, setUserCredentials] = useState({
@@ -31,8 +32,8 @@ const SignUp = ({ signUpStart }) => {
   };
 
   return (
-    <div className='sign-up'>
-      <h2 className='title'>I need to create an account</h2>
+    <SignUpContainer>
+      <SignUpTitle>I need to create an account</SignUpTitle>
       <span>Sign up with your email</span>
       <form className='sign-up-form' onSubmit={onSubmit}>
         <FormInput
@@ -72,7 +73,7 @@ const SignUp = ({ signUpStart }) => {
         />
         <Button type='submit'>CREATE ACCOUNT</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 

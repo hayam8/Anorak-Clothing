@@ -7,7 +7,11 @@ import {
   emailSignInStart
 } from "../../../redux/user/userActions";
 
-import "./sign-in.scss";
+import {
+  SignInContainer,
+  SignInTitle,
+  ButtonsBarContainer
+} from "./signin.styles";
 
 const SignIn = ({ emailSignInStart, googleSignInStart }) => {
   const [userCredentials, setCredentials] = useState({
@@ -30,8 +34,8 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
   };
 
   return (
-    <div className='sign-in'>
-      <h2>Already have an account?</h2>
+    <SignInContainer>
+      <SignInTitle>Already have an account?</SignInTitle>
       <span>Sign in with your email and password</span>
 
       <form onSubmit={onSubmit}>
@@ -51,14 +55,14 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
           label='password'
           required
         />
-        <div className='buttons'>
+        <ButtonsBarContainer>
           <Button type='submit'>Sign In</Button>
           <Button type='button' onClick={googleSignInStart} isGoogleSignIn>
             Sign in with Google
           </Button>
-        </div>
+        </ButtonsBarContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
