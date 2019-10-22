@@ -8,11 +8,12 @@ import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import SignInAndSignUp from "./pages/auth/SignInAndSignUp";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
+
+import { GlobalStyle } from "./global.styles";
+
 import { checkUserSession } from "./redux/user/userActions";
 
 import { selectCurrentUser } from "./redux/user/user.selector";
-
-import "./App.css";
 
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const App = ({ checkUserSession, currentUser }) => {
 
   return (
     <div>
+      <GlobalStyle />
       <NavBar />
       <Switch>
         <Route exact path='/' component={HomePage} />
